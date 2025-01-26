@@ -8,27 +8,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         brightness: Brightness.dark,
       ),
       home: const MyHomePage(title: 'Reefscape Scouting App'),
@@ -38,15 +22,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -66,7 +41,6 @@ const List<String> list = <String>[
 enum BargeLevel { none, park, shallow, deep }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   int currentPageIndex = 0;
   bool preloadValue = false;
   String dropdownValue = list.first;
@@ -91,22 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController teamNumber = TextEditingController();
   final TextEditingController comments = TextEditingController();
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   String printBoolean(bool value) {
     return value ? 'Yes' : 'No';
   }
 
-// Helper function for field position (you can adjust this as per your requirements)
   String getFieldPosition(int fieldPosition) {
     switch (fieldPosition) {
       case 0:
@@ -164,12 +126,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -212,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.amber,
         title: Text(
           widget.title,
-          style: TextStyle(color: Colors.black), // Change text color to white
+          style: TextStyle(color: Colors.black),
         ),
       ),
       body: <Widget>[
@@ -304,8 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceEvenly, // Center the row on the screen
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Radio<int>(
                         value: 1,
@@ -317,8 +272,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           });
                         },
                       ),
-                      SizedBox(
-                          width: 8), // Add spacing between the radio buttons
+                      SizedBox(width: 8),
                       Radio<int>(
                         value: 2,
                         activeColor: Colors.amber,
@@ -329,8 +283,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           });
                         },
                       ),
-                      SizedBox(
-                          width: 8), // Add spacing between the radio buttons
+                      SizedBox(width: 8),
                       Radio<int>(
                         value: 3,
                         activeColor: Colors.amber,
@@ -374,7 +327,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
                       'assets/images/field image.png',
-                      fit: BoxFit.cover, // or BoxFit.contain, BoxFit.fill, etc.
+                      fit: BoxFit.cover,
                     ))
               ],
             )),
@@ -397,26 +350,22 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .center, // Center the content horizontally
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Checkbox(
                       value: leaveValue,
-                      activeColor:
-                          Colors.amber, // Color of the checkbox when checked
+                      activeColor: Colors.amber,
                       onChanged: (newValue) {
                         setState(() {
                           leaveValue = newValue!;
                         });
                       },
                     ),
-                    SizedBox(
-                        width:
-                            8.0), // Add spacing between the checkbox and the text
+                    SizedBox(width: 8.0),
                     Text(
                       'Leave?',
                       style: TextStyle(
-                        fontSize: 16.0, // Adjust font size as needed
+                        fontSize: 16.0,
                       ),
                     ),
                   ],
@@ -425,16 +374,14 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Coral L4",
                       style: TextStyle(
                         color: Colors.amber,
-                        fontSize: 16.0, // Adjust font size as needed
-                        fontWeight:
-                            FontWeight.bold, // Optional: Make the text bold
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -443,15 +390,15 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceEvenly, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
                       onPressed: () {
                         setState(() {
-                          if (autoL4Count > 0)
-                            autoL4Count--; // Decrease counter but not below 0
+                          if (autoL4Count > 0) {
+                            autoL4Count--;
+                          }
                         });
                       },
                     ),
@@ -460,9 +407,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "$autoL4Count",
                         style: TextStyle(
-                          fontSize: 12.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -470,7 +416,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          autoL4Count++; // Increase counter
+                          autoL4Count++;
                         });
                       },
                     ),
@@ -480,16 +426,14 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Coral L3",
                       style: TextStyle(
                         color: Colors.amber,
-                        fontSize: 16.0, // Adjust font size as needed
-                        fontWeight:
-                            FontWeight.bold, // Optional: Make the text bold
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -498,15 +442,15 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceEvenly, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
                       onPressed: () {
                         setState(() {
-                          if (autoL3Count > 0)
-                            autoL3Count--; // Decrease counter but not below 0
+                          if (autoL3Count > 0) {
+                            autoL3Count--;
+                          }
                         });
                       },
                     ),
@@ -515,9 +459,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "$autoL3Count",
                         style: TextStyle(
-                          fontSize: 12.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -525,7 +468,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          autoL3Count++; // Increase counter
+                          autoL3Count++;
                         });
                       },
                     ),
@@ -535,16 +478,14 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Coral L2",
                       style: TextStyle(
                         color: Colors.amber,
-                        fontSize: 16.0, // Adjust font size as needed
-                        fontWeight:
-                            FontWeight.bold, // Optional: Make the text bold
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -553,15 +494,15 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceEvenly, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
                       onPressed: () {
                         setState(() {
-                          if (autoL2Count > 0)
-                            autoL2Count--; // Decrease counter but not below 0
+                          if (autoL2Count > 0) {
+                            autoL2Count--;
+                          }
                         });
                       },
                     ),
@@ -570,9 +511,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "$autoL2Count",
                         style: TextStyle(
-                          fontSize: 12.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -580,7 +520,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          autoL2Count++; // Increase counter
+                          autoL2Count++;
                         });
                       },
                     ),
@@ -590,16 +530,14 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Coral Trough",
                       style: TextStyle(
                         color: Colors.amber,
-                        fontSize: 16.0, // Adjust font size as needed
-                        fontWeight:
-                            FontWeight.bold, // Optional: Make the text bold
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -608,15 +546,15 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceEvenly, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
                       onPressed: () {
                         setState(() {
-                          if (autoTroughCount > 0)
-                            autoTroughCount--; // Decrease counter but not below 0
+                          if (autoTroughCount > 0) {
+                            autoTroughCount--;
+                          }
                         });
                       },
                     ),
@@ -625,9 +563,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "$autoTroughCount",
                         style: TextStyle(
-                          fontSize: 12.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -635,7 +572,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          autoTroughCount++; // Increase counter
+                          autoTroughCount++;
                         });
                       },
                     ),
@@ -645,16 +582,14 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Algae Processor",
                       style: TextStyle(
                         color: Colors.amber,
-                        fontSize: 16.0, // Adjust font size as needed
-                        fontWeight:
-                            FontWeight.bold, // Optional: Make the text bold
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -663,15 +598,15 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceEvenly, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
                       onPressed: () {
                         setState(() {
-                          if (autoProcessorCount > 0)
-                            autoProcessorCount--; // Decrease counter but not below 0
+                          if (autoProcessorCount > 0) {
+                            autoProcessorCount--;
+                          }
                         });
                       },
                     ),
@@ -680,9 +615,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "$autoProcessorCount",
                         style: TextStyle(
-                          fontSize: 12.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -690,7 +624,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          autoProcessorCount++; // Increase counter
+                          autoProcessorCount++;
                         });
                       },
                     ),
@@ -700,16 +634,14 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.center, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Algae Net",
                       style: TextStyle(
                         color: Colors.amber,
-                        fontSize: 16.0, // Adjust font size as needed
-                        fontWeight:
-                            FontWeight.bold, // Optional: Make the text bold
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -718,15 +650,15 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceEvenly, // Centers the text horizontally
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
                       onPressed: () {
                         setState(() {
-                          if (autoNetCount > 0)
-                            autoNetCount--; // Decrease counter but not below 0
+                          if (autoNetCount > 0) {
+                            autoNetCount--;
+                          }
                         });
                       },
                     ),
@@ -735,9 +667,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "$autoNetCount",
                         style: TextStyle(
-                          fontSize: 12.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -745,7 +676,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          autoNetCount++; // Increase counter
+                          autoNetCount++;
                         });
                       },
                     ),
@@ -763,8 +694,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .center, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Teleop",
@@ -780,16 +710,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .center, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Coral L4",
                         style: TextStyle(
                           color: Colors.amber,
-                          fontSize: 16.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -798,15 +726,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceEvenly, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
                         icon: Icon(Icons.remove),
                         onPressed: () {
                           setState(() {
-                            if (teleL4Count > 0)
-                              teleL4Count--; // Decrease counter but not below 0
+                            if (teleL4Count > 0) {
+                              teleL4Count--;
+                            }
                           });
                         },
                       ),
@@ -815,9 +743,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           "$teleL4Count",
                           style: TextStyle(
-                            fontSize: 12.0, // Adjust font size as needed
-                            fontWeight:
-                                FontWeight.bold, // Optional: Make the text bold
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -825,7 +752,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: Icon(Icons.add),
                         onPressed: () {
                           setState(() {
-                            teleL4Count++; // Increase counter
+                            teleL4Count++;
                           });
                         },
                       ),
@@ -835,16 +762,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .center, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Coral L3",
                         style: TextStyle(
                           color: Colors.amber,
-                          fontSize: 16.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -853,15 +778,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceEvenly, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
                         icon: Icon(Icons.remove),
                         onPressed: () {
                           setState(() {
-                            if (teleL3Count > 0)
-                              teleL3Count--; // Decrease counter but not below 0
+                            if (teleL3Count > 0) {
+                              teleL3Count--;
+                            }
                           });
                         },
                       ),
@@ -870,9 +795,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           "$teleL3Count",
                           style: TextStyle(
-                            fontSize: 12.0, // Adjust font size as needed
-                            fontWeight:
-                                FontWeight.bold, // Optional: Make the text bold
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -880,7 +804,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: Icon(Icons.add),
                         onPressed: () {
                           setState(() {
-                            teleL3Count++; // Increase counter
+                            teleL3Count++;
                           });
                         },
                       ),
@@ -890,16 +814,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .center, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Coral L2",
                         style: TextStyle(
                           color: Colors.amber,
-                          fontSize: 16.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -908,15 +830,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceEvenly, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
                         icon: Icon(Icons.remove),
                         onPressed: () {
                           setState(() {
-                            if (teleL2Count > 0)
-                              teleL2Count--; // Decrease counter but not below 0
+                            if (teleL2Count > 0) {
+                              teleL2Count--;
+                            }
                           });
                         },
                       ),
@@ -925,9 +847,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           "$teleL2Count",
                           style: TextStyle(
-                            fontSize: 12.0, // Adjust font size as needed
-                            fontWeight:
-                                FontWeight.bold, // Optional: Make the text bold
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -935,7 +856,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: Icon(Icons.add),
                         onPressed: () {
                           setState(() {
-                            teleL2Count++; // Increase counter
+                            teleL2Count++;
                           });
                         },
                       ),
@@ -945,16 +866,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .center, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Coral Trough",
                         style: TextStyle(
                           color: Colors.amber,
-                          fontSize: 16.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -963,15 +882,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceEvenly, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
                         icon: Icon(Icons.remove),
                         onPressed: () {
                           setState(() {
-                            if (teleTroughCount > 0)
-                              teleTroughCount--; // Decrease counter but not below 0
+                            if (teleTroughCount > 0) {
+                              teleTroughCount--;
+                            }
                           });
                         },
                       ),
@@ -980,9 +899,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           "$teleTroughCount",
                           style: TextStyle(
-                            fontSize: 12.0, // Adjust font size as needed
-                            fontWeight:
-                                FontWeight.bold, // Optional: Make the text bold
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -990,7 +908,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: Icon(Icons.add),
                         onPressed: () {
                           setState(() {
-                            teleTroughCount++; // Increase counter
+                            teleTroughCount++;
                           });
                         },
                       ),
@@ -1000,16 +918,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .center, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Algae Processor",
                         style: TextStyle(
                           color: Colors.amber,
-                          fontSize: 16.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -1018,15 +934,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceEvenly, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
                         icon: Icon(Icons.remove),
                         onPressed: () {
                           setState(() {
-                            if (teleProcessorCount > 0)
-                              teleProcessorCount--; // Decrease counter but not below 0
+                            if (teleProcessorCount > 0) {
+                              teleProcessorCount--;
+                            }
                           });
                         },
                       ),
@@ -1035,9 +951,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           "$teleProcessorCount",
                           style: TextStyle(
-                            fontSize: 12.0, // Adjust font size as needed
-                            fontWeight:
-                                FontWeight.bold, // Optional: Make the text bold
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -1045,7 +960,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: Icon(Icons.add),
                         onPressed: () {
                           setState(() {
-                            teleProcessorCount++; // Increase counter
+                            teleProcessorCount++;
                           });
                         },
                       ),
@@ -1055,16 +970,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .center, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Algae Net",
                         style: TextStyle(
                           color: Colors.amber,
-                          fontSize: 16.0, // Adjust font size as needed
-                          fontWeight:
-                              FontWeight.bold, // Optional: Make the text bold
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -1073,15 +986,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment
-                        .spaceEvenly, // Centers the text horizontally
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
                         icon: Icon(Icons.remove),
                         onPressed: () {
                           setState(() {
-                            if (teleNetCount > 0)
-                              teleNetCount--; // Decrease counter but not below 0
+                            if (teleNetCount > 0) {
+                              teleNetCount--;
+                            }
                           });
                         },
                       ),
@@ -1090,9 +1003,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           "$teleNetCount",
                           style: TextStyle(
-                            fontSize: 12.0, // Adjust font size as needed
-                            fontWeight:
-                                FontWeight.bold, // Optional: Make the text bold
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -1100,7 +1012,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: Icon(Icons.add),
                         onPressed: () {
                           setState(() {
-                            teleNetCount++; // Increase counter
+                            teleNetCount++;
                           });
                         },
                       ),
@@ -1128,10 +1040,9 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
-                  elevation: 8.0, // Add a shadow to the card
+                  elevation: 8.0,
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(16.0), // Rounded corners
+                    borderRadius: BorderRadius.circular(16.0),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
@@ -1139,14 +1050,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Text(
-                          'Climb Level', // Title header
+                          'Climb Level',
                           style: TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(
-                            height: 16.0), // Space between title and options
+                        const SizedBox(height: 16.0),
                         ListTile(
                           title: const Text('None'),
                           leading: Radio<BargeLevel>(
@@ -1240,16 +1150,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  width:
-                      double.infinity, // Makes the button span the full width
-                  height: 50.0, // Button height
+                  width: double.infinity,
+                  height: 50.0,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Colors.amber, // Amber color for the button
+                      backgroundColor: Colors.amber,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(12.0), // Rounded corners
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
                     onPressed: () {
@@ -1260,46 +1167,41 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: const Text(
                       'Update QR Code',
                       style: TextStyle(
-                        color: Colors.black, // Black text for contrast
-                        fontSize: 18.0, // Font size for the text
-                        fontWeight: FontWeight.bold, // Bold text
+                        color: Colors.black,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
               ),
               QrImageView(
-                data: data, // The data you want to encode
-                size: 200.0, // Size of the QR code
-                version: QrVersions
-                    .auto, // Automatically selects the QR code version
+                data: data,
+                size: 200.0,
+                version: QrVersions.auto,
                 backgroundColor: Colors.white,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  width:
-                      double.infinity, // Makes the button span the full width
-                  height: 50.0, // Button height
+                  width: double.infinity,
+                  height: 50.0,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Colors.amber, // Amber color for the button
+                      backgroundColor: Colors.amber,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(12.0), // Rounded corners
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
                     ),
                     onPressed: () {
-                      // Define the button action here
                       resetData();
                     },
                     child: const Text(
                       'Clear Data',
                       style: TextStyle(
-                        color: Colors.black, // Black text for contrast
-                        fontSize: 18.0, // Font size for the text
-                        fontWeight: FontWeight.bold, // Bold text
+                        color: Colors.black,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -1309,40 +1211,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ][currentPageIndex],
-      // body: Center(
-      //   // Center is a layout widget. It takes a single child and positions it
-      //   // in the middle of the parent.
-      //   child: Column(
-      //     // Column is also a layout widget. It takes a list of children and
-      //     // arranges them vertically. By default, it sizes itself to fit its
-      //     // children horizontally, and tries to be as tall as its parent.
-      //     //
-      //     // Column has various properties to control how it sizes itself and
-      //     // how it positions its children. Here we use mainAxisAlignment to
-      //     // center the children vertically; the main axis here is the vertical
-      //     // axis because Columns are vertical (the cross axis would be
-      //     // horizontal).
-      //     //
-      //     // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-      //     // action in the IDE, or press "p" in the console), to see the
-      //     // wireframe for each widget.
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: <Widget>[
-      //       const Text(
-      //         'You have pushed the button this many times:',
-      //       ),
-      //       Text(
-      //         '$_counter',
-      //         style: Theme.of(context).textTheme.headlineMedium,
-      //       ),
-      //     ],
-      //   ),
-      // ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
