@@ -64,6 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController matchNumber = TextEditingController();
   final TextEditingController teamNumber = TextEditingController();
   final TextEditingController comments = TextEditingController();
+  bool diedValue = false;
+  bool brokeValue = false;
+  bool defenseValue = false;
 
   String printBoolean(bool value) {
     return value ? 'Yes' : 'No';
@@ -89,10 +92,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void formatData() {
     setState(() {
       data =
-          "${teamNumber.text}*${matchNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}"
-          "*${printBoolean(leaveValue)}*$autoTroughCount*$autoL2Count*$autoL3Count*$autoL4Count*$autoProcessorCount*$autoNetCount*${""}"
-          "*$teleTroughCount*$teleL2Count*$teleL3Count*$teleL4Count*$teleProcessorCount*$teleNetCount*${""}"
-          "*$level*${comments.text}*${scoutName.text}";
+          "${teamNumber.text}*${matchNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}*${printBoolean(leaveValue)}*"
+          "$autoTroughCount*$autoL2Count*$autoL3Count*$autoL4Count*$autoProcessorCount*$autoNetCount*${printBoolean(diedValue)}*${printBoolean(brokeValue)}*"
+          "${printBoolean(defenseValue)}*$teleTroughCount*$teleL2Count*$teleL3Count*$teleL4Count*$teleProcessorCount*$teleNetCount*$level*${comments.text}*${scoutName.text}";
     });
   }
 
@@ -121,6 +123,9 @@ class _MyHomePageState extends State<MyHomePage> {
       matchNumber.text = currentValue.toString();
       teamNumber.text = "";
       currentPageIndex = 0;
+      diedValue = false;
+      brokeValue = false;
+      defenseValue = false;
     });
   }
 
@@ -704,6 +709,53 @@ class _MyHomePageState extends State<MyHomePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Checkbox(
+                        value: diedValue,
+                        activeColor: Colors.amber,
+                        onChanged: (newValue) {
+                          setState(() {
+                            diedValue = newValue!;
+                          });
+                        },
+                      ),
+                      Text("Died",
+                          style: TextStyle(
+                            fontSize: 10.0,
+                          )),
+                      Checkbox(
+                        value: brokeValue,
+                        activeColor: Colors.amber,
+                        onChanged: (newValue) {
+                          setState(() {
+                            brokeValue = newValue!;
+                          });
+                        },
+                      ),
+                      Text("Broke",
+                          style: TextStyle(
+                            fontSize: 12.0,
+                          )),
+                      Checkbox(
+                        value: defenseValue,
+                        activeColor: Colors.amber,
+                        onChanged: (newValue) {
+                          setState(() {
+                            defenseValue = newValue!;
+                          });
+                        },
+                      ),
+                      Text("Defense",
+                          style: TextStyle(
+                            fontSize: 12.0,
+                          )),
                     ],
                   ),
                 ),
