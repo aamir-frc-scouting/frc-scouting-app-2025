@@ -67,6 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
   bool diedValue = false;
   bool brokeValue = false;
   bool defenseValue = false;
+  int autoTakeOffCount = 0;
+  int teleTakeOffCount = 0;
 
   String printBoolean(bool value) {
     return value ? 'Yes' : 'No';
@@ -93,8 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       data =
           "${teamNumber.text}*${matchNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}*${printBoolean(leaveValue)}*"
-          "$autoTroughCount*$autoL2Count*$autoL3Count*$autoL4Count*$autoProcessorCount*$autoNetCount*${printBoolean(diedValue)}*${printBoolean(brokeValue)}*"
-          "${printBoolean(defenseValue)}*$teleTroughCount*$teleL2Count*$teleL3Count*$teleL4Count*$teleProcessorCount*$teleNetCount*$level*${comments.text}*${scoutName.text}";
+          "$autoTroughCount*$autoL2Count*$autoL3Count*$autoL4Count*$autoProcessorCount*$autoNetCount*$autoTakeOffCount*${printBoolean(diedValue)}*${printBoolean(brokeValue)}*"
+          "${printBoolean(defenseValue)}*$teleTroughCount*$teleL2Count*$teleL3Count*$teleL4Count*$teleProcessorCount*$teleNetCount*$teleTakeOffCount*$level*${comments.text}*${scoutName.text}";
     });
   }
 
@@ -126,6 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
       diedValue = false;
       brokeValue = false;
       defenseValue = false;
+      autoTakeOffCount = 0;
+      teleTakeOffCount = 0;
     });
   }
 
@@ -384,7 +388,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text(
                       "Coral L4",
                       style: TextStyle(
-                        color: Colors.amber,
+                        color: Colors.purpleAccent,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -421,7 +425,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          autoL4Count++;
+                          if (autoL4Count < 12) {
+                            autoL4Count++;
+                          }
                         });
                       },
                     ),
@@ -436,7 +442,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text(
                       "Coral L3",
                       style: TextStyle(
-                        color: Colors.amber,
+                        color: Colors.purpleAccent,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -473,7 +479,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          autoL3Count++;
+                          if (autoL3Count < 12) {
+                            autoL3Count++;
+                          }
                         });
                       },
                     ),
@@ -488,7 +496,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text(
                       "Coral L2",
                       style: TextStyle(
-                        color: Colors.amber,
+                        color: Colors.purpleAccent,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -525,7 +533,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          autoL2Count++;
+                          if (autoL2Count < 12) {
+                            autoL2Count++;
+                          }
                         });
                       },
                     ),
@@ -540,7 +550,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text(
                       "Coral Trough",
                       style: TextStyle(
-                        color: Colors.amber,
+                        color: Colors.purpleAccent,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -577,7 +587,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          autoTroughCount++;
+                          if (autoTroughCount < 12) {
+                            autoTroughCount++;
+                          }
                         });
                       },
                     ),
@@ -592,7 +604,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text(
                       "Algae Processor",
                       style: TextStyle(
-                        color: Colors.amber,
+                        color: Colors.tealAccent,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -644,7 +656,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Text(
                       "Algae Net",
                       style: TextStyle(
-                        color: Colors.amber,
+                        color: Colors.tealAccent,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -682,6 +694,58 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: () {
                         setState(() {
                           autoNetCount++;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Algae Taken Off",
+                      style: TextStyle(
+                        color: Colors.tealAccent,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      onPressed: () {
+                        setState(() {
+                          if (autoTakeOffCount > 0) {
+                            autoTakeOffCount--;
+                          }
+                        });
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        "$autoTakeOffCount",
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        setState(() {
+                          autoTakeOffCount++;
                         });
                       },
                     ),
@@ -767,7 +831,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         "Coral L4",
                         style: TextStyle(
-                          color: Colors.amber,
+                          color: Colors.purpleAccent,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -819,7 +883,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         "Coral L3",
                         style: TextStyle(
-                          color: Colors.amber,
+                          color: Colors.purpleAccent,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -871,7 +935,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         "Coral L2",
                         style: TextStyle(
-                          color: Colors.amber,
+                          color: Colors.purpleAccent,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -923,7 +987,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         "Coral Trough",
                         style: TextStyle(
-                          color: Colors.amber,
+                          color: Colors.purpleAccent,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -975,7 +1039,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         "Algae Processor",
                         style: TextStyle(
-                          color: Colors.amber,
+                          color: Colors.tealAccent,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -1027,7 +1091,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Text(
                         "Algae Net",
                         style: TextStyle(
-                          color: Colors.amber,
+                          color: Colors.tealAccent,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -1065,6 +1129,58 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () {
                           setState(() {
                             teleNetCount++;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Algae Taken Off",
+                        style: TextStyle(
+                          color: Colors.tealAccent,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.remove),
+                        onPressed: () {
+                          setState(() {
+                            if (teleTakeOffCount > 0) {
+                              teleTakeOffCount--;
+                            }
+                          });
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          "$teleTakeOffCount",
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        onPressed: () {
+                          setState(() {
+                            teleTakeOffCount++;
                           });
                         },
                       ),
