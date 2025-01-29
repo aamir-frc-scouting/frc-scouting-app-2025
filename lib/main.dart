@@ -351,7 +351,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   "Auto",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24.0,
+                    fontSize: 36.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -383,12 +383,20 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       "Coral L4",
                       style: TextStyle(
                         color: Colors.purpleAccent,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "Algae Processor",
+                      style: TextStyle(
+                        color: Colors.tealAccent,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -403,6 +411,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
+                      iconSize: 36.0,
                       onPressed: () {
                         setState(() {
                           if (autoL4Count > 0) {
@@ -416,18 +425,49 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "$autoL4Count",
                         style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                     IconButton(
                       icon: Icon(Icons.add),
+                      iconSize: 36.0,
                       onPressed: () {
                         setState(() {
                           if (autoL4Count < 12) {
                             autoL4Count++;
                           }
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      iconSize: 36.0,
+                      onPressed: () {
+                        setState(() {
+                          if (autoProcessorCount > 0) {
+                            autoProcessorCount--;
+                          }
+                        });
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        "$autoProcessorCount",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      iconSize: 36.0,
+                      onPressed: () {
+                        setState(() {
+                          autoProcessorCount++;
                         });
                       },
                     ),
@@ -437,12 +477,20 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       "Coral L3",
                       style: TextStyle(
                         color: Colors.purpleAccent,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "Algae Net",
+                      style: TextStyle(
+                        color: Colors.tealAccent,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -457,6 +505,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
+                      iconSize: 36.0,
                       onPressed: () {
                         setState(() {
                           if (autoL3Count > 0) {
@@ -470,18 +519,49 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "$autoL3Count",
                         style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                     IconButton(
                       icon: Icon(Icons.add),
+                      iconSize: 36.0,
                       onPressed: () {
                         setState(() {
                           if (autoL3Count < 12) {
                             autoL3Count++;
                           }
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      iconSize: 36.0,
+                      onPressed: () {
+                        setState(() {
+                          if (autoNetCount > 0) {
+                            autoNetCount--;
+                          }
+                        });
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        "$autoNetCount",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      iconSize: 36.0,
+                      onPressed: () {
+                        setState(() {
+                          autoNetCount++;
                         });
                       },
                     ),
@@ -491,12 +571,20 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       "Coral L2",
                       style: TextStyle(
                         color: Colors.purpleAccent,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "Algae Taken Off",
+                      style: TextStyle(
+                        color: Colors.tealAccent,
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -511,6 +599,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
+                      iconSize: 36.0,
                       onPressed: () {
                         setState(() {
                           if (autoL2Count > 0) {
@@ -524,18 +613,49 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "$autoL2Count",
                         style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                     IconButton(
                       icon: Icon(Icons.add),
+                      iconSize: 36.0,
                       onPressed: () {
                         setState(() {
                           if (autoL2Count < 12) {
                             autoL2Count++;
                           }
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      iconSize: 36.0,
+                      onPressed: () {
+                        setState(() {
+                          if (autoTakeOffCount > 0) {
+                            autoTakeOffCount--;
+                          }
+                        });
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        "$autoTakeOffCount",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      iconSize: 36.0,
+                      onPressed: () {
+                        setState(() {
+                          autoTakeOffCount++;
                         });
                       },
                     ),
@@ -565,6 +685,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.remove),
+                      iconSize: 36.0,
                       onPressed: () {
                         setState(() {
                           if (autoTroughCount > 0) {
@@ -578,174 +699,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(
                         "$autoTroughCount",
                         style: TextStyle(
-                          fontSize: 12.0,
+                          fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                     IconButton(
                       icon: Icon(Icons.add),
+                      iconSize: 36.0,
                       onPressed: () {
                         setState(() {
                           if (autoTroughCount < 12) {
                             autoTroughCount++;
                           }
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Algae Processor",
-                      style: TextStyle(
-                        color: Colors.tealAccent,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.remove),
-                      onPressed: () {
-                        setState(() {
-                          if (autoProcessorCount > 0) {
-                            autoProcessorCount--;
-                          }
-                        });
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(
-                        "$autoProcessorCount",
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        setState(() {
-                          autoProcessorCount++;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Algae Net",
-                      style: TextStyle(
-                        color: Colors.tealAccent,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.remove),
-                      onPressed: () {
-                        setState(() {
-                          if (autoNetCount > 0) {
-                            autoNetCount--;
-                          }
-                        });
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(
-                        "$autoNetCount",
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        setState(() {
-                          autoNetCount++;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Algae Taken Off",
-                      style: TextStyle(
-                        color: Colors.tealAccent,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.remove),
-                      onPressed: () {
-                        setState(() {
-                          if (autoTakeOffCount > 0) {
-                            autoTakeOffCount--;
-                          }
-                        });
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(
-                        "$autoTakeOffCount",
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        setState(() {
-                          autoTakeOffCount++;
                         });
                       },
                     ),
@@ -769,7 +735,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         "Teleop",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 24.0,
+                          fontSize: 36.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -792,7 +758,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       Text("Died",
                           style: TextStyle(
-                            fontSize: 10.0,
+                            fontSize: 16.0,
                           )),
                       Checkbox(
                         value: brokeValue,
@@ -805,7 +771,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       Text("Broke",
                           style: TextStyle(
-                            fontSize: 12.0,
+                            fontSize: 16.0,
                           )),
                       Checkbox(
                         value: defenseValue,
@@ -818,20 +784,28 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       Text("Defense",
                           style: TextStyle(
-                            fontSize: 12.0,
+                            fontSize: 16.0,
                           )),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         "Coral L4",
                         style: TextStyle(
                           color: Colors.purpleAccent,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "Algae Processor",
+                        style: TextStyle(
+                          color: Colors.tealAccent,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -846,6 +820,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       IconButton(
                         icon: Icon(Icons.remove),
+                        iconSize: 36.0,
                         onPressed: () {
                           setState(() {
                             if (teleL4Count > 0) {
@@ -859,16 +834,49 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           "$teleL4Count",
                           style: TextStyle(
-                            fontSize: 12.0,
+                            fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       IconButton(
                         icon: Icon(Icons.add),
+                        iconSize: 36.0,
                         onPressed: () {
                           setState(() {
-                            teleL4Count++;
+                            if (teleL4Count < 12) {
+                              teleL4Count++;
+                            }
+                          });
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.remove),
+                        iconSize: 36.0,
+                        onPressed: () {
+                          setState(() {
+                            if (teleProcessorCount > 0) {
+                              teleProcessorCount--;
+                            }
+                          });
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          "$teleProcessorCount",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        iconSize: 36.0,
+                        onPressed: () {
+                          setState(() {
+                            teleProcessorCount++;
                           });
                         },
                       ),
@@ -878,12 +886,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         "Coral L3",
                         style: TextStyle(
                           color: Colors.purpleAccent,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "Algae Net",
+                        style: TextStyle(
+                          color: Colors.tealAccent,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -898,6 +914,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       IconButton(
                         icon: Icon(Icons.remove),
+                        iconSize: 36.0,
                         onPressed: () {
                           setState(() {
                             if (teleL3Count > 0) {
@@ -911,16 +928,49 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           "$teleL3Count",
                           style: TextStyle(
-                            fontSize: 12.0,
+                            fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       IconButton(
                         icon: Icon(Icons.add),
+                        iconSize: 36.0,
                         onPressed: () {
                           setState(() {
-                            teleL3Count++;
+                            if (teleL3Count < 12) {
+                              teleL3Count++;
+                            }
+                          });
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.remove),
+                        iconSize: 36.0,
+                        onPressed: () {
+                          setState(() {
+                            if (teleNetCount > 0) {
+                              teleNetCount--;
+                            }
+                          });
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          "$teleNetCount",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        iconSize: 36.0,
+                        onPressed: () {
+                          setState(() {
+                            teleNetCount++;
                           });
                         },
                       ),
@@ -930,12 +980,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         "Coral L2",
                         style: TextStyle(
                           color: Colors.purpleAccent,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "Algae Taken Off",
+                        style: TextStyle(
+                          color: Colors.tealAccent,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -950,6 +1008,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       IconButton(
                         icon: Icon(Icons.remove),
+                        iconSize: 36.0,
                         onPressed: () {
                           setState(() {
                             if (teleL2Count > 0) {
@@ -963,16 +1022,49 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           "$teleL2Count",
                           style: TextStyle(
-                            fontSize: 12.0,
+                            fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       IconButton(
                         icon: Icon(Icons.add),
+                        iconSize: 36.0,
                         onPressed: () {
                           setState(() {
-                            teleL2Count++;
+                            if (teleL2Count < 12) {
+                              teleL2Count++;
+                            }
+                          });
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.remove),
+                        iconSize: 36.0,
+                        onPressed: () {
+                          setState(() {
+                            if (teleTakeOffCount > 0) {
+                              teleTakeOffCount--;
+                            }
+                          });
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          "$teleTakeOffCount",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        iconSize: 36.0,
+                        onPressed: () {
+                          setState(() {
+                            teleTakeOffCount++;
                           });
                         },
                       ),
@@ -1002,6 +1094,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       IconButton(
                         icon: Icon(Icons.remove),
+                        iconSize: 36.0,
                         onPressed: () {
                           setState(() {
                             if (teleTroughCount > 0) {
@@ -1015,172 +1108,19 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Text(
                           "$teleTroughCount",
                           style: TextStyle(
-                            fontSize: 12.0,
+                            fontSize: 16.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       IconButton(
                         icon: Icon(Icons.add),
+                        iconSize: 36.0,
                         onPressed: () {
                           setState(() {
-                            teleTroughCount++;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Algae Processor",
-                        style: TextStyle(
-                          color: Colors.tealAccent,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.remove),
-                        onPressed: () {
-                          setState(() {
-                            if (teleProcessorCount > 0) {
-                              teleProcessorCount--;
+                            if (teleTroughCount < 12) {
+                              teleTroughCount++;
                             }
-                          });
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Text(
-                          "$teleProcessorCount",
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.add),
-                        onPressed: () {
-                          setState(() {
-                            teleProcessorCount++;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Algae Net",
-                        style: TextStyle(
-                          color: Colors.tealAccent,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.remove),
-                        onPressed: () {
-                          setState(() {
-                            if (teleNetCount > 0) {
-                              teleNetCount--;
-                            }
-                          });
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Text(
-                          "$teleNetCount",
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.add),
-                        onPressed: () {
-                          setState(() {
-                            teleNetCount++;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Algae Taken Off",
-                        style: TextStyle(
-                          color: Colors.tealAccent,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.remove),
-                        onPressed: () {
-                          setState(() {
-                            if (teleTakeOffCount > 0) {
-                              teleTakeOffCount--;
-                            }
-                          });
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Text(
-                          "$teleTakeOffCount",
-                          style: TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.add),
-                        onPressed: () {
-                          setState(() {
-                            teleTakeOffCount++;
                           });
                         },
                       ),
@@ -1200,7 +1140,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   "Barge",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24.0,
+                    fontSize: 36.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -1252,7 +1192,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         ListTile(
-                          title: const Text('Shallow'),
+                          title: const Text('Shallow (high)'),
                           leading: Radio<BargeLevel>(
                             activeColor: Colors.amber,
                             value: BargeLevel.shallow,
@@ -1265,7 +1205,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         ListTile(
-                          title: const Text('Deep'),
+                          title: const Text('Deep (low)'),
                           leading: Radio<BargeLevel>(
                             activeColor: Colors.amber,
                             value: BargeLevel.deep,
@@ -1310,7 +1250,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   "QR",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24.0,
+                    fontSize: 36.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
