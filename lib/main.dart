@@ -133,6 +133,34 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void showConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Confirm Action"),
+          content: Text(
+              "Are you sure you want to clear all data? This action cannot be undone."),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                resetData(); // Call your function to clear data
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text("Confirm", style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,6 +168,9 @@ class _MyHomePageState extends State<MyHomePage> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
+            if (currentPageIndex == 4) {
+              formatData();
+            }
           });
         },
         indicatorColor: Colors.amber,
@@ -1255,34 +1286,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 50.0,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.amber,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        formatData();
-                      });
-                    },
-                    child: const Text(
-                      'Update QR Code',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
               QrImageView(
                 data: data,
                 size: 200.0,
@@ -1302,7 +1305,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     onPressed: () {
-                      resetData();
+                      showConfirmationDialog(context);
                     },
                     child: const Text(
                       'Clear Data',
