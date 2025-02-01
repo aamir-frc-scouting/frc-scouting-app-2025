@@ -69,6 +69,12 @@ class _MyHomePageState extends State<MyHomePage> {
   bool defenseValue = false;
   int autoTakeOffCount = 0;
   int teleTakeOffCount = 0;
+  bool reefOneValue = false;
+  bool reefTwoValue = false;
+  bool reefThreeValue = false;
+  bool reefFourValue = false;
+  bool reefFiveValue = false;
+  bool reefSixValue = false;
 
   String printBoolean(bool value) {
     return value ? 'Yes' : 'No';
@@ -168,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
-            if (currentPageIndex == 4) {
+            if (currentPageIndex == 5) {
               formatData();
             }
           });
@@ -186,6 +192,11 @@ class _MyHomePageState extends State<MyHomePage> {
             selectedIcon: Icon(Icons.adb),
             icon: Icon(Icons.adb_outlined),
             label: 'Auto',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.map),
+            icon: Icon(Icons.map_outlined),
+            label: 'Reef',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.videogame_asset),
@@ -298,77 +309,119 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Radio<int>(
-                        value: 1,
-                        activeColor: Colors.amber,
-                        groupValue: selectedValue,
-                        onChanged: (int? value) {
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Radio<int>(
-                        value: 2,
-                        activeColor: Colors.amber,
-                        groupValue: selectedValue,
-                        onChanged: (int? value) {
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Radio<int>(
-                        value: 3,
-                        activeColor: Colors.amber,
-                        groupValue: selectedValue,
-                        onChanged: (int? value) {
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Radio<int>(
-                        value: 4,
-                        activeColor: Colors.amber,
-                        groupValue: selectedValue,
-                        onChanged: (int? value) {
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Radio<int>(
-                        value: 5,
-                        activeColor: Colors.amber,
-                        groupValue: selectedValue,
-                        onChanged: (int? value) {
-                          setState(() {
-                            selectedValue = value!;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
                       'assets/images/field image.png',
                       fit: BoxFit.cover,
-                    ))
+                    )),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          Radio<int>(
+                            value: 1,
+                            activeColor: Colors.amber,
+                            groupValue: selectedValue,
+                            onChanged: (int? value) {
+                              setState(() {
+                                selectedValue = value!;
+                              });
+                            },
+                          ),
+                          Text(
+                            '1',
+                            style: TextStyle(
+                                color: Colors.amber,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Radio<int>(
+                            value: 2,
+                            activeColor: Colors.amber,
+                            groupValue: selectedValue,
+                            onChanged: (int? value) {
+                              setState(() {
+                                selectedValue = value!;
+                              });
+                            },
+                          ),
+                          Text(
+                            '2',
+                            style: TextStyle(
+                                color: Colors.amber,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Radio<int>(
+                            value: 3,
+                            activeColor: Colors.amber,
+                            groupValue: selectedValue,
+                            onChanged: (int? value) {
+                              setState(() {
+                                selectedValue = value!;
+                              });
+                            },
+                          ),
+                          Text(
+                            '3',
+                            style: TextStyle(
+                                color: Colors.amber,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Radio<int>(
+                            value: 4,
+                            activeColor: Colors.amber,
+                            groupValue: selectedValue,
+                            onChanged: (int? value) {
+                              setState(() {
+                                selectedValue = value!;
+                              });
+                            },
+                          ),
+                          Text(
+                            '4',
+                            style: TextStyle(
+                                color: Colors.amber,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Radio<int>(
+                            value: 5,
+                            activeColor: Colors.amber,
+                            groupValue: selectedValue,
+                            onChanged: (int? value) {
+                              setState(() {
+                                selectedValue = value!;
+                              });
+                            },
+                          ),
+                          Text(
+                            '5',
+                            style: TextStyle(
+                                color: Colors.amber,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
             )),
         Card(
@@ -745,6 +798,177 @@ class _MyHomePageState extends State<MyHomePage> {
                           }
                         });
                       },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Reef Placement",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 36.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Image.asset(
+                        'assets/images/reef placement.png',
+                        fit: BoxFit.cover, // Adjust as needed
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        Checkbox(
+                          value: reefOneValue,
+                          activeColor: Colors.amber,
+                          onChanged: (newValue) {
+                            setState(() {
+                              reefOneValue = newValue!;
+                            });
+                          },
+                        ),
+                        Text(
+                          "1",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.amber,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Checkbox(
+                          value: reefTwoValue,
+                          activeColor: Colors.amber,
+                          onChanged: (newValue) {
+                            setState(() {
+                              reefTwoValue = newValue!;
+                            });
+                          },
+                        ),
+                        Text(
+                          "2",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.amber,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Checkbox(
+                          value: reefThreeValue,
+                          activeColor: Colors.amber,
+                          onChanged: (newValue) {
+                            setState(() {
+                              reefThreeValue = newValue!;
+                            });
+                          },
+                        ),
+                        Text(
+                          "3",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.amber,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Checkbox(
+                          value: reefFourValue,
+                          activeColor: Colors.amber,
+                          onChanged: (newValue) {
+                            setState(() {
+                              reefFourValue = newValue!;
+                            });
+                          },
+                        ),
+                        Text(
+                          "4",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.amber,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Checkbox(
+                          value: reefFiveValue,
+                          activeColor: Colors.amber,
+                          onChanged: (newValue) {
+                            setState(() {
+                              reefFiveValue = newValue!;
+                            });
+                          },
+                        ),
+                        Text(
+                          "5",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.amber,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Checkbox(
+                          value: reefSixValue,
+                          activeColor: Colors.amber,
+                          onChanged: (newValue) {
+                            setState(() {
+                              reefSixValue = newValue!;
+                            });
+                          },
+                        ),
+                        Text(
+                          "6",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.amber,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
