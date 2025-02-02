@@ -186,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
           NavigationDestination(
             selectedIcon: Icon(Icons.add_location),
             icon: Icon(Icons.add_location_outlined),
-            label: 'Pre-Match',
+            label: 'Pre',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.adb),
@@ -1402,6 +1402,20 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: comments,
+                  cursorColor: Colors.amber,
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.amber, width: 2.0),
+                    ),
+                    border: OutlineInputBorder(),
+                    hintText: 'Comments',
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Card(
                   elevation: 8.0,
                   shape: RoundedRectangleBorder(
@@ -1474,20 +1488,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: comments,
-                  cursorColor: Colors.amber,
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.amber, width: 2.0),
-                    ),
-                    border: OutlineInputBorder(),
-                    hintText: 'Comments',
                   ),
                 ),
               ),
