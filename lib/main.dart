@@ -69,12 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool defenseValue = false;
   int autoTakeOffCount = 0;
   int teleTakeOffCount = 0;
-  bool reefOneValue = false;
-  bool reefTwoValue = false;
-  bool reefThreeValue = false;
-  bool reefFourValue = false;
-  bool reefFiveValue = false;
-  bool reefSixValue = false;
+  List<bool> reefPlacements = [false, false, false, false, false, false];
 
   String printBoolean(bool value) {
     return value ? 'Yes' : 'No';
@@ -100,9 +95,9 @@ class _MyHomePageState extends State<MyHomePage> {
   void formatData() {
     setState(() {
       data =
-          "${teamNumber.text}*${matchNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}*${printBoolean(leaveValue)}*"
-          "$autoTroughCount*$autoL2Count*$autoL3Count*$autoL4Count*$autoProcessorCount*$autoNetCount*$autoTakeOffCount*${printBoolean(diedValue)}*${printBoolean(brokeValue)}*"
-          "${printBoolean(defenseValue)}*$teleTroughCount*$teleL2Count*$teleL3Count*$teleL4Count*$teleProcessorCount*$teleNetCount*$teleTakeOffCount*$level*${comments.text}*${scoutName.text}";
+          "${matchNumber.text}*${teamNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}*${printBoolean(leaveValue)}*"
+          "$autoL4Count*$autoL3Count*$autoL2Count*$autoTroughCount*$autoProcessorCount*$autoNetCount*$autoTakeOffCount*${getReefPlacement(reefPlacements)}*${printBoolean(diedValue)}*${printBoolean(brokeValue)}*"
+          "${printBoolean(defenseValue)}*$teleL4Count*$teleL3Count*$teleL2Count*$teleTroughCount*$teleProcessorCount*$teleNetCount*$teleTakeOffCount*$level*${comments.text}*${scoutName.text}";
     });
   }
 
@@ -136,6 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
       defenseValue = false;
       autoTakeOffCount = 0;
       teleTakeOffCount = 0;
+      reefPlacements.fillRange(0, reefPlacements.length, false);
     });
   }
 
@@ -165,6 +161,18 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
     );
+  }
+
+  String getReefPlacement(List<bool> arr) {
+    String str = "";
+    for (bool placement in arr) {
+      if (placement) {
+        str += "1";
+      } else {
+        str += "0";
+      }
+    }
+    return str;
   }
 
   @override
@@ -847,11 +855,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         Checkbox(
-                          value: reefOneValue,
+                          value: reefPlacements[0],
                           activeColor: Colors.amber,
                           onChanged: (newValue) {
                             setState(() {
-                              reefOneValue = newValue!;
+                              reefPlacements[0] = newValue!;
                             });
                           },
                         ),
@@ -868,11 +876,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         Checkbox(
-                          value: reefTwoValue,
+                          value: reefPlacements[1],
                           activeColor: Colors.amber,
                           onChanged: (newValue) {
                             setState(() {
-                              reefTwoValue = newValue!;
+                              reefPlacements[1] = newValue!;
                             });
                           },
                         ),
@@ -889,11 +897,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         Checkbox(
-                          value: reefThreeValue,
+                          value: reefPlacements[2],
                           activeColor: Colors.amber,
                           onChanged: (newValue) {
                             setState(() {
-                              reefThreeValue = newValue!;
+                              reefPlacements[2] = newValue!;
                             });
                           },
                         ),
@@ -910,11 +918,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         Checkbox(
-                          value: reefFourValue,
+                          value: reefPlacements[3],
                           activeColor: Colors.amber,
                           onChanged: (newValue) {
                             setState(() {
-                              reefFourValue = newValue!;
+                              reefPlacements[3] = newValue!;
                             });
                           },
                         ),
@@ -931,11 +939,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         Checkbox(
-                          value: reefFiveValue,
+                          value: reefPlacements[4],
                           activeColor: Colors.amber,
                           onChanged: (newValue) {
                             setState(() {
-                              reefFiveValue = newValue!;
+                              reefPlacements[4] = newValue!;
                             });
                           },
                         ),
@@ -952,11 +960,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Column(
                       children: [
                         Checkbox(
-                          value: reefSixValue,
+                          value: reefPlacements[5],
                           activeColor: Colors.amber,
                           onChanged: (newValue) {
                             setState(() {
-                              reefSixValue = newValue!;
+                              reefPlacements[5] = newValue!;
                             });
                           },
                         ),
