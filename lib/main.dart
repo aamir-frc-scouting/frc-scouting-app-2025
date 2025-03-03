@@ -77,15 +77,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String getFieldPosition(int fieldPosition) {
     switch (fieldPosition) {
-      case 0:
-        return "Alliance Wall";
       case 1:
-        return "Alliance Side";
+        return "Alliance Wall";
       case 2:
-        return "Center";
+        return "Alliance Side";
       case 3:
-        return "Processor Side";
+        return "Center";
       case 4:
+        return "Processor Side";
+      case 5:
         return "Processor Wall";
       default:
         return "ROBOT NOT FOUND";
