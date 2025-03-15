@@ -41,6 +41,7 @@ const List<String> list = <String>[
 enum BargeLevel { none, park, shallow, deep }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool firstPlace = true;
   int currentPageIndex = 0;
   bool preloadValue = false;
   String dropdownValue = list.first;
@@ -53,6 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int teleTroughCount = 0;
   int teleProcessorCount = 0;
   int teleNetCount = 0;
+  int teleMissedCount = 0;
+  String? selectedReefPlacement;
+  int? selectedReefHeight;
   BargeLevel? level = BargeLevel.none;
   String data = "";
   final TextEditingController scoutName = TextEditingController();
@@ -64,8 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
   bool defenseValue = false;
   int autoTakeOffCount = 0;
   int teleTakeOffCount = 0;
-  List<bool> reefPlacements = [false, false, false, false, false, false];
-
   String printBoolean(bool value) {
     return value ? 'Yes' : 'No';
   }
@@ -87,17 +89,39 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Widget _buildHeightRadioButton(int value, String label) {
+    return Row(
+      children: [
+        Radio<int>(
+          value: value,
+          groupValue: selectedReefHeight,
+          activeColor: Colors.amber,
+          onChanged: (int? newValue) {
+            setState(() {
+              selectedReefHeight = newValue!;
+            });
+          },
+        ),
+        Text(
+          label,
+          style: TextStyle(fontSize: 18, color: Colors.white),
+        ),
+      ],
+    );
+  }
+
   void formatData() {
     setState(() {
       data =
           "${matchNumber.text}*${teamNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}*${printBoolean(leaveValue)}*"
-          "$auto*$autoTakeOffCount*${getReefPlacement(reefPlacements)}*${printBoolean(diedValue)}*${printBoolean(brokeValue)}*"
-          "${printBoolean(defenseValue)}*$teleL4Count*$teleL3Count*$teleL2Count*$teleTroughCount*$teleProcessorCount*$teleNetCount*$teleTakeOffCount*$level*${comments.text}*${scoutName.text}";
+          "$auto*${printBoolean(diedValue)}*${printBoolean(brokeValue)}*"
+          "${printBoolean(defenseValue)}*$teleL4Count*$teleL3Count*$teleL2Count*$teleTroughCount*$teleProcessorCount*$teleNetCount*$teleTakeOffCount*$teleMissedCount*$level*${comments.text}*${scoutName.text}";
     });
   }
 
   void resetData() {
     setState(() {
+      firstPlace = true;
       preloadValue = false;
       selectedValue = 1;
       leaveValue = false;
@@ -108,6 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
       teleTroughCount = 0;
       teleProcessorCount = 0;
       teleNetCount = 0;
+      teleMissedCount = 0;
       level = BargeLevel.none;
       data = "";
       comments.text = "";
@@ -121,7 +146,6 @@ class _MyHomePageState extends State<MyHomePage> {
       defenseValue = false;
       autoTakeOffCount = 0;
       teleTakeOffCount = 0;
-      reefPlacements.fillRange(0, reefPlacements.length, false);
     });
   }
 
@@ -153,16 +177,49 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  String getReefPlacement(List<bool> arr) {
-    String str = "";
-    for (bool placement in arr) {
-      if (placement) {
-        str += "1";
-      } else {
-        str += "0";
-      }
+  void _showSaveConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Confirm Save"),
+          content: Text("Are you sure you want to save these selections?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                // Perform save action here
+                clearPlacements();
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text("Confirm"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void clearPlacements() {
+    if (!firstPlace) {
+      auto += " - ";
     }
-    return str;
+    auto += selectedReefPlacement!;
+    auto += selectedReefHeight.toString();
+    setState(() {
+      firstPlace = false;
+    });
+
+    setState(() {
+      selectedReefPlacement = null;
+      selectedReefHeight = null;
+    });
+    print(auto);
   }
 
   @override
@@ -172,7 +229,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
-            if (currentPageIndex == 5) {
+            if (currentPageIndex == 4) {
               formatData();
             }
           });
@@ -190,11 +247,6 @@ class _MyHomePageState extends State<MyHomePage> {
             selectedIcon: Icon(Icons.adb),
             icon: Icon(Icons.adb_outlined),
             label: 'Auto',
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.map),
-            icon: Icon(Icons.map_outlined),
-            label: 'Reef',
           ),
           NavigationDestination(
             selectedIcon: Icon(Icons.videogame_asset),
@@ -428,7 +480,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(0.0),
                 child: Text(
                   "Auto",
                   style: TextStyle(
@@ -439,7 +491,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(0.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -462,176 +514,239 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-        Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  double imageWidth = constraints.maxWidth;
+                  double imageHeight = imageWidth *
+                      (16 / 16); // Adjust to match your image's aspect ratio
+
+                  return Stack(
+                    children: [
+                      Image.asset(
+                        'assets/images/reef placement.png',
+                        width: imageWidth,
+                        height: imageHeight,
+                        fit: BoxFit.cover,
+                      ),
+
+                      // Radio Button 1
+                      Positioned(
+                        left: imageWidth * 0.43,
+                        top: imageHeight * 0.74,
+                        child: Radio<String>(
+                          value: "A",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 2
+                      Positioned(
+                        left: imageWidth * 0.53,
+                        top: imageHeight * 0.74,
+                        child: Radio<String>(
+                          value: "B",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 3
+                      Positioned(
+                        left: imageWidth * 0.67,
+                        top: imageHeight * 0.65,
+                        child: Radio<String>(
+                          value: "C",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 4
+                      Positioned(
+                        left: imageWidth * 0.72,
+                        top: imageHeight * 0.57,
+                        child: Radio<String>(
+                          value: "D",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 5
+                      Positioned(
+                        left: imageWidth * 0.73,
+                        top: imageHeight * 0.4,
+                        child: Radio<String>(
+                          value: "E",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 6
+                      Positioned(
+                        left: imageWidth * 0.68,
+                        top: imageHeight * 0.32,
+                        child: Radio<String>(
+                          value: "F",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 7
+                      Positioned(
+                        left: imageWidth * 0.43,
+                        top: imageHeight * 0.22,
+                        child: Radio<String>(
+                          value: "H",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 8
+                      Positioned(
+                        left: imageWidth * 0.53,
+                        top: imageHeight * 0.22,
+                        child: Radio<String>(
+                          value: "G",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 9
+                      Positioned(
+                        left: imageWidth * 0.23,
+                        top: imageHeight * 0.4,
+                        child: Radio<String>(
+                          value: "J",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 10
+                      Positioned(
+                        left: imageWidth * 0.28,
+                        top: imageHeight * 0.32,
+                        child: Radio<String>(
+                          value: "I",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 11
+                      Positioned(
+                        left: imageWidth * 0.27,
+                        top: imageHeight * 0.65,
+                        child: Radio<String>(
+                          value: "L",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 12
+                      Positioned(
+                        left: imageWidth * 0.22,
+                        top: imageHeight * 0.57,
+                        child: Radio<String>(
+                          value: "K",
+                          groupValue: selectedReefPlacement,
+                          activeColor: Colors.amber,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedReefPlacement = newValue!;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Reef Placement",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 36.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    _buildHeightRadioButton(4, "L4"),
+                    _buildHeightRadioButton(3, "L3"),
+                    _buildHeightRadioButton(2, "L2"),
+                    _buildHeightRadioButton(1, "Trough"),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Image.asset(
-                        'assets/images/reef placement.png',
-                        fit: BoxFit.cover, // Adjust as needed
-                      ),
-                    ),
-                  ],
+              ElevatedButton(
+                onPressed: () {
+                  _showSaveConfirmationDialog(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.amber,
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  textStyle:
+                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      children: [
-                        Checkbox(
-                          value: reefPlacements[0],
-                          activeColor: Colors.amber,
-                          onChanged: (newValue) {
-                            setState(() {
-                              reefPlacements[0] = newValue!;
-                            });
-                          },
-                        ),
-                        Text(
-                          "1",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.amber,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Checkbox(
-                          value: reefPlacements[1],
-                          activeColor: Colors.amber,
-                          onChanged: (newValue) {
-                            setState(() {
-                              reefPlacements[1] = newValue!;
-                            });
-                          },
-                        ),
-                        Text(
-                          "2",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.amber,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Checkbox(
-                          value: reefPlacements[2],
-                          activeColor: Colors.amber,
-                          onChanged: (newValue) {
-                            setState(() {
-                              reefPlacements[2] = newValue!;
-                            });
-                          },
-                        ),
-                        Text(
-                          "3",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.amber,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Checkbox(
-                          value: reefPlacements[3],
-                          activeColor: Colors.amber,
-                          onChanged: (newValue) {
-                            setState(() {
-                              reefPlacements[3] = newValue!;
-                            });
-                          },
-                        ),
-                        Text(
-                          "4",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.amber,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Checkbox(
-                          value: reefPlacements[4],
-                          activeColor: Colors.amber,
-                          onChanged: (newValue) {
-                            setState(() {
-                              reefPlacements[4] = newValue!;
-                            });
-                          },
-                        ),
-                        Text(
-                          "5",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.amber,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Checkbox(
-                          value: reefPlacements[5],
-                          activeColor: Colors.amber,
-                          onChanged: (newValue) {
-                            setState(() {
-                              reefPlacements[5] = newValue!;
-                            });
-                          },
-                        ),
-                        Text(
-                          "6",
-                          style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.amber,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                child: Text("Save"),
               ),
             ],
           ),
@@ -989,12 +1104,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         "Coral Trough",
                         style: TextStyle(
                           color: Colors.purpleAccent,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "Missed",
+                        style: TextStyle(
+                          color: Colors.red,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -1036,6 +1159,36 @@ class _MyHomePageState extends State<MyHomePage> {
                             if (teleTroughCount < 12) {
                               teleTroughCount++;
                             }
+                          });
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.remove),
+                        iconSize: 36.0,
+                        onPressed: () {
+                          setState(() {
+                            if (teleMissedCount > 0) {
+                              teleMissedCount--;
+                            }
+                          });
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          "$teleMissedCount",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        iconSize: 36.0,
+                        onPressed: () {
+                          setState(() {
+                            teleMissedCount++;
                           });
                         },
                       ),
