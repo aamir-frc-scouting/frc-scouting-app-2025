@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -110,13 +111,50 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  int encryptChar(int charCode, int publicKey, int modulus) {
+    return BigInt.from(charCode)
+        .modPow(BigInt.from(publicKey), BigInt.from(modulus))
+        .toInt();
+  }
+
+  String encryptString(String text, int publicKey, int modulus) {
+    List<int> encryptedCodes = text.codeUnits
+        .map((char) => encryptChar(char, publicKey, modulus))
+        .toList();
+    return encryptedCodes.join(" ");
+  }
+
+  String encryptData() {
+    int publicKey = 199;
+    int privateKey = 719;
+    int modulus = 991; // This should be a product of two primes in real RSA
+
+    String message = "Hello";
+
+    return encryptString(message, publicKey, modulus);
+  }
+
   void formatData() {
+    int publicKey = 199;
+    int privateKey = 719;
+    int modulus = 991;
+    data =
+        "${matchNumber.text}*${teamNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}*"
+        "${printBoolean(leaveValue)}*$auto*"
+        "${printBoolean(diedValue)}*${printBoolean(brokeValue)}*${printBoolean(defenseValue)}*"
+        "$teleL4Count*$teleL3Count*$teleL2Count*$teleTroughCount*$teleProcessorCount*$teleNetCount*$teleTakeOffCount*$teleMissedCount*"
+        "$level*${comments.text}*${getCoralCycles()}*${getEffectiveCycles()}*${scoutName.text}";
     setState(() {
-      data =
-          "${matchNumber.text}*${teamNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}*${printBoolean(leaveValue)}*"
-          "$auto*${printBoolean(diedValue)}*${printBoolean(brokeValue)}*"
-          "${printBoolean(defenseValue)}*$teleL4Count*$teleL3Count*$teleL2Count*$teleTroughCount*$teleProcessorCount*$teleNetCount*$teleTakeOffCount*$teleMissedCount*$level*${comments.text}*${scoutName.text}";
+      data = encryptString(data, publicKey, modulus);
     });
+  }
+
+  int getCoralCycles() {
+    return teleL4Count + teleL3Count + teleL2Count + teleTroughCount;
+  }
+
+  double getEffectiveCycles() {
+    return (getCoralCycles() - teleMissedCount) / getCoralCycles();
   }
 
   void resetData() {
@@ -219,7 +257,6 @@ class _MyHomePageState extends State<MyHomePage> {
       selectedReefPlacement = null;
       selectedReefHeight = null;
     });
-    print(auto);
   }
 
   @override
@@ -358,120 +395,102 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'assets/images/field image.png',
-                      fit: BoxFit.cover,
-                    )),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                LayoutBuilder(builder: (context, constraints) {
+                  double imageWidth = constraints.maxWidth;
+                  double imageHeight = imageWidth *
+                      (4 / 12); // Adjust to match your image's aspect ratio
+
+                  return Stack(
                     children: [
-                      Column(
-                        children: [
-                          Radio<int>(
-                            value: 1,
-                            activeColor: Colors.amber,
-                            groupValue: selectedValue,
-                            onChanged: (int? value) {
-                              setState(() {
-                                selectedValue = value!;
-                              });
-                            },
-                          ),
-                          Text(
-                            '1',
-                            style: TextStyle(
-                                color: Colors.amber,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                      Image.asset(
+                        'assets/images/field image.png',
+                        width: imageWidth,
+                        height: imageHeight,
+                        fit: BoxFit.cover,
                       ),
-                      Column(
-                        children: [
-                          Radio<int>(
-                            value: 2,
-                            activeColor: Colors.amber,
-                            groupValue: selectedValue,
-                            onChanged: (int? value) {
-                              setState(() {
-                                selectedValue = value!;
-                              });
-                            },
-                          ),
-                          Text(
-                            '2',
-                            style: TextStyle(
-                                color: Colors.amber,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+
+                      // Radio Button 1
+                      Positioned(
+                        left: imageWidth * 0.1,
+                        top: imageHeight * 0.2,
+                        child: Radio<int>(
+                          value: 1,
+                          activeColor: Colors.amber,
+                          groupValue: selectedValue,
+                          onChanged: (int? value) {
+                            setState(() {
+                              selectedValue = value!;
+                            });
+                          },
+                        ),
                       ),
-                      Column(
-                        children: [
-                          Radio<int>(
-                            value: 3,
-                            activeColor: Colors.amber,
-                            groupValue: selectedValue,
-                            onChanged: (int? value) {
-                              setState(() {
-                                selectedValue = value!;
-                              });
-                            },
-                          ),
-                          Text(
-                            '3',
-                            style: TextStyle(
-                                color: Colors.amber,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+
+                      // Radio Button 2
+                      Positioned(
+                        left: imageWidth * 0.27,
+                        top: imageHeight * 0.2,
+                        child: Radio<int>(
+                          value: 2,
+                          activeColor: Colors.amber,
+                          groupValue: selectedValue,
+                          onChanged: (int? value) {
+                            setState(() {
+                              selectedValue = value!;
+                            });
+                          },
+                        ),
                       ),
-                      Column(
-                        children: [
-                          Radio<int>(
-                            value: 4,
-                            activeColor: Colors.amber,
-                            groupValue: selectedValue,
-                            onChanged: (int? value) {
-                              setState(() {
-                                selectedValue = value!;
-                              });
-                            },
-                          ),
-                          Text(
-                            '4',
-                            style: TextStyle(
-                                color: Colors.amber,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+
+                      // Radio Button 3
+                      Positioned(
+                        left: imageWidth * 0.43,
+                        top: imageHeight * 0.2,
+                        child: Radio<int>(
+                          value: 3,
+                          activeColor: Colors.amber,
+                          groupValue: selectedValue,
+                          onChanged: (int? value) {
+                            setState(() {
+                              selectedValue = value!;
+                            });
+                          },
+                        ),
                       ),
-                      Column(
-                        children: [
-                          Radio<int>(
-                            value: 5,
-                            activeColor: Colors.amber,
-                            groupValue: selectedValue,
-                            onChanged: (int? value) {
-                              setState(() {
-                                selectedValue = value!;
-                              });
-                            },
-                          ),
-                          Text(
-                            '5',
-                            style: TextStyle(
-                                color: Colors.amber,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+
+                      // Radio Button 4
+                      Positioned(
+                        left: imageWidth * 0.59,
+                        top: imageHeight * 0.2,
+                        child: Radio<int>(
+                          value: 4,
+                          activeColor: Colors.amber,
+                          groupValue: selectedValue,
+                          onChanged: (int? value) {
+                            setState(() {
+                              selectedValue = value!;
+                            });
+                          },
+                        ),
+                      ),
+
+                      // Radio Button 5
+                      Positioned(
+                        left: imageWidth * 0.75,
+                        top: imageHeight * 0.2,
+                        child: Radio<int>(
+                          value: 5,
+                          activeColor: Colors.amber,
+                          groupValue: selectedValue,
+                          onChanged: (int? value) {
+                            setState(() {
+                              selectedValue = value!;
+                            });
+                          },
+                        ),
                       ),
                     ],
-                  ),
-                ),
+                  );
+                }),
               ],
             )),
         Card(
