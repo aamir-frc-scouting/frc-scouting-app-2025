@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'dart:math';
 
 void main() {
   runApp(const MyApp());
@@ -111,41 +110,14 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  int encryptChar(int charCode, int publicKey, int modulus) {
-    return BigInt.from(charCode)
-        .modPow(BigInt.from(publicKey), BigInt.from(modulus))
-        .toInt();
-  }
-
-  String encryptString(String text, int publicKey, int modulus) {
-    List<int> encryptedCodes = text.codeUnits
-        .map((char) => encryptChar(char, publicKey, modulus))
-        .toList();
-    return encryptedCodes.join(" ");
-  }
-
-  String encryptData() {
-    int publicKey = 199;
-    int privateKey = 719;
-    int modulus = 991; // This should be a product of two primes in real RSA
-
-    String message = "Hello";
-
-    return encryptString(message, publicKey, modulus);
-  }
-
   void formatData() {
-    int publicKey = 199;
-    int privateKey = 719;
-    int modulus = 991;
-    data =
-        "${matchNumber.text}*${teamNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}*"
-        "${printBoolean(leaveValue)}*$auto*"
-        "${printBoolean(diedValue)}*${printBoolean(brokeValue)}*${printBoolean(defenseValue)}*"
-        "$teleL4Count*$teleL3Count*$teleL2Count*$teleTroughCount*$teleProcessorCount*$teleNetCount*$teleTakeOffCount*$teleMissedCount*"
-        "$level*${comments.text}*${getCoralCycles()}*${getEffectiveCycles()}*${scoutName.text}";
     setState(() {
-      data = encryptString(data, publicKey, modulus);
+      data =
+          "${matchNumber.text}*${teamNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}*"
+          "${printBoolean(leaveValue)}*$auto*"
+          "${printBoolean(diedValue)}*${printBoolean(brokeValue)}*${printBoolean(defenseValue)}*"
+          "$teleL4Count*$teleL3Count*$teleL2Count*$teleTroughCount*$teleProcessorCount*$teleNetCount*$teleTakeOffCount*$teleMissedCount*"
+          "$level*${comments.text}*${getCoralCycles()}*${getEffectiveCycles()}*${scoutName.text}";
     });
   }
 
@@ -537,7 +509,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 builder: (context, constraints) {
                   double imageWidth = constraints.maxWidth;
                   double imageHeight = imageWidth *
-                      (16 / 16); // Adjust to match your image's aspect ratio
+                      (14 / 16); // Adjust to match your image's aspect ratio
 
                   return Stack(
                     children: [
