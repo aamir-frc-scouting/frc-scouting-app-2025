@@ -750,10 +750,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                        "YOU MUST HIT THE SAVE BUTTON ABOVE FOR THE CORAL TO COUNT")
+                      "You must hit the save button above!",
+                      softWrap: true,
+                    )
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
