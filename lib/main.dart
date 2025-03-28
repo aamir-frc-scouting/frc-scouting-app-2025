@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int selectedValue = 1;
   bool leaveValue = false;
   String auto = "";
+  int autoCount = 0;
   int teleL4Count = 0;
   int teleL3Count = 0;
   int teleL2Count = 0;
@@ -65,7 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController comments = TextEditingController();
   bool diedValue = false;
   bool brokeValue = false;
-  bool defenseValue = false;
+  bool playedDefense = false;
+  bool facedDefense = false;
   int autoTakeOffCount = 0;
   int teleTakeOffCount = 0;
   String printBoolean(bool value) {
@@ -114,10 +116,10 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       data =
           "${matchNumber.text}*${teamNumber.text}*${printBoolean(preloadValue)}*$dropdownValue*${getFieldPosition(selectedValue)}*"
-          "${printBoolean(leaveValue)}*$auto*"
-          "${printBoolean(diedValue)}*${printBoolean(brokeValue)}*${printBoolean(defenseValue)}*"
+          "${printBoolean(leaveValue)}*$auto*$autoCount"
+          "${printBoolean(diedValue)}*${printBoolean(brokeValue)}*${printBoolean(playedDefense)}*${printBoolean(facedDefense)}*"
           "$teleL4Count*$teleL3Count*$teleL2Count*$teleTroughCount*$teleProcessorCount*$teleNetCount*$teleTakeOffCount*$teleMissedCount*"
-          "$level*${comments.text}*${getCoralCycles()}*${getEffectiveCycles()}*${scoutName.text}";
+          "$level*${comments.text}*${getCoralCycles()}*${scoutName.text}";
     });
   }
 
@@ -131,6 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void resetData() {
     setState(() {
+      autoCount = 0;
       firstPlace = true;
       preloadValue = false;
       selectedValue = 1;
@@ -153,7 +156,8 @@ class _MyHomePageState extends State<MyHomePage> {
       currentPageIndex = 0;
       diedValue = false;
       brokeValue = false;
-      defenseValue = false;
+      playedDefense = false;
+      facedDefense = false;
       autoTakeOffCount = 0;
       teleTakeOffCount = 0;
     });
@@ -219,6 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (!firstPlace) {
       auto += " - ";
     }
+    autoCount++;
     auto += selectedReefPlacement!;
     auto += selectedReefHeight.toString();
     setState(() {
@@ -739,6 +744,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 child: Text("Save"),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                        "YOU MUST HIT THE SAVE BUTTON ABOVE FOR THE CORAL TO COUNT")
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -794,16 +809,37 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: TextStyle(
                             fontSize: 16.0,
                           )),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
                       Checkbox(
-                        value: defenseValue,
+                        value: playedDefense,
                         activeColor: Colors.amber,
                         onChanged: (newValue) {
                           setState(() {
-                            defenseValue = newValue!;
+                            playedDefense = newValue!;
                           });
                         },
                       ),
-                      Text("Defense",
+                      Text("Played Defense",
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          )),
+                      Checkbox(
+                        value: facedDefense,
+                        activeColor: Colors.amber,
+                        onChanged: (newValue) {
+                          setState(() {
+                            facedDefense = newValue!;
+                          });
+                        },
+                      ),
+                      Text("Faced Defense",
                           style: TextStyle(
                             fontSize: 16.0,
                           )),
