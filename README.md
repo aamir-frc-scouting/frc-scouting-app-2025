@@ -17,9 +17,9 @@
 
 ## Background
 
-My freshman year on [FRC Team 1730 (Team Driven)](https://www.thebluealliance.com/team/1730/2025), I was a scout lead learning the ropes from seniors Heath Crump and Caden Findlay. That was 2022 Rapid React — the team won the [Newton Division](https://www.thebluealliance.com/event/2022new) and reached [Einstein](https://www.thebluealliance.com/event/2022cmptx). Sophomore year (2023 Charged Up), I took over as solo developer and built my first Android scouting app in Java, exporting QR codes that got scanned into Excel. Junior year (2024 Crescendo), I kept the match app going and added a second app for pit scouting.
+My freshman year on [FRC Team 1730 (Team Driven)](https://www.thebluealliance.com/team/1730/2022), I was a scout lead learning the ropes from seniors Heath Crump and Caden Findlay. That was 2022 Rapid React — the team won the [Newton Division](https://www.thebluealliance.com/event/2022new) and reached [Einstein](https://www.thebluealliance.com/event/2022cmptx). Sophomore year (2023 Charged Up), I took over as solo developer and built my first Android scouting app in Java, exporting QR codes that got scanned into Excel. Junior year (2024 Crescendo), I kept the match app going and added a second app for pit scouting.
 
-Senior year I wanted a more professional setup. I rewrote both apps in Dart/Flutter for cross-platform support — the same codebase runs on Android tablets, iOS, web, and desktop. The apps still generate QR codes, but now they're scanned by a Python/customtkinter intake app that validates and inserts each record into SQLite. Strategy questions became SQL queries instead of VLOOKUP formulas.
+[Senior year](https://www.thebluealliance.com/team/1730/2025) I wanted a more professional setup. I rewrote both apps in Dart/Flutter — one modern codebase with responsive layouts instead of fixed XML tuned to one tablet size. The apps still generate QR codes, but now they're scanned by a Python/customtkinter intake app that validates and inserts each record into SQLite. Strategy questions became SQL queries instead of VLOOKUP formulas.
 
 — [Aamir Abatiyow](https://github.com/AamirAbatiyow)
 
@@ -49,7 +49,7 @@ Senior year I wanted a more professional setup. I rewrote both apps in Dart/Flut
 - **Real-time counters**: Track coral placements (L4/L3/L2/Trough), algae handling (processor/net), and missed cycles
 - **Status tracking**: Robot issues (died/broke), defense played/faced, climb level (none/park/shallow/deep)
 - **QR code export**: One tap generates a scannable QR code with all 24 data fields
-- **Cross-platform**: Single Flutter codebase runs on Android, iOS, web, and desktop
+- **Cross-platform codebase**: One Flutter codebase that can target Android, iOS, web, and desktop; used on Android tablets at events
 - **Offline-first**: No network required during matches — perfect for competition venues
 - **Auto-increment match**: Match number advances automatically after each submission
 
@@ -197,7 +197,7 @@ algaeTakeOff*missed*bargeLevel*comments*totalCoralCycles*scoutName
 
 ### Why Flutter + SQLite?
 
-The Java/Android apps worked, but device fragmentation was a pain — not everyone had Android. Flutter compiles to Android, iOS, web, and desktop from one codebase. The Excel macros were fragile and hard to modify; SQLite lets anyone write queries without touching VBA. The QR transfer stayed because it works offline at venues with unreliable WiFi.
+The Java/Android apps worked, but the fixed XML layouts didn't scale across screen sizes — every new tablet meant manual tweaks. Flutter gave me responsive layouts and one modern codebase for both the match and pit apps. The Excel macros were fragile and hard to modify; SQLite lets anyone write queries without touching VBA. The QR transfer stayed because it works offline at venues with unreliable WiFi.
 
 ## Tech Stack
 
