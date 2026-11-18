@@ -7,7 +7,7 @@
 [![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/)
 [![FRC 2025](https://img.shields.io/badge/FRC-2025_Reefscape-0077C8?style=for-the-badge)](https://firstfrc.blob.core.windows.net/frc2025/Manual/2025GameManual.pdf)
 
-**Cross-platform Flutter app that captures match data and encodes it into QR codes for offline scouting at FRC competitions.**
+**Flutter app that captures match data and encodes it into QR codes for offline scouting at FRC competitions. Used on Android tablets at events.**
 
 [Features](#features) · [Screenshots](#screenshots) · [Architecture](#architecture) · [Usage Stats](#usage-stats) · [Build](#build-instructions)
 
@@ -17,11 +17,11 @@
 
 ## Background
 
-My freshman year on [FRC Team 1730 (Team Driven)](https://www.thebluealliance.com/team/1730/2022), I was a scout lead learning the ropes from seniors Heath Crump and Caden Findlay. That was 2022 Rapid React — the team won the [Newton Division](https://www.thebluealliance.com/event/2022new) and reached [Einstein](https://www.thebluealliance.com/event/2022cmptx). Sophomore year (2023 Charged Up), I took over as solo developer and built my first Android scouting app in Java, exporting QR codes that got scanned into Excel. Junior year (2024 Crescendo), I kept the match app going and added a second app for pit scouting.
+My freshman year on [FRC Team 1730 (Team Driven)](https://www.thebluealliance.com/team/1730/2022), I was a scout lead learning the ropes from seniors Heath Crump and Caden Findlay. That was 2022 Rapid React, and the team won the [Newton Division](https://www.thebluealliance.com/event/2022new) and reached [Einstein](https://www.thebluealliance.com/event/2022cmptx). Sophomore year (2023 Charged Up), I took over as solo developer and built my first Android scouting app in Java, exporting QR codes that got scanned into Excel. Junior year (2024 Crescendo), I kept the match app going and added a second app for pit scouting.
 
-[Senior year](https://www.thebluealliance.com/team/1730/2025) I wanted a more professional setup. I rewrote both apps in Dart/Flutter — one modern codebase with responsive layouts instead of fixed XML tuned to one tablet size. The apps still generate QR codes, but now they're scanned by a Python/customtkinter intake app that validates and inserts each record into SQLite. Strategy questions became SQL queries instead of VLOOKUP formulas.
+[Senior year](https://www.thebluealliance.com/team/1730/2025) I wanted a more professional setup. I rewrote both apps in Dart/Flutter, with responsive layouts instead of fixed XML layouts. The apps still generate QR codes. At the Heartland Regional those codes went into Excel through a Python script, and from the Greater Kansas City Regional through Worlds they were scanned by a Python/customtkinter intake app that validates and inserts each record into SQLite. Strategy questions became SQL queries instead of Excel filters and pivot tables.
 
-— [Aamir Abatiyow](https://github.com/AamirAbatiyow)
+[Aamir Abatiyow](https://github.com/AamirAbatiyow)
 
 ## Screenshots
 
@@ -44,13 +44,13 @@ My freshman year on [FRC Team 1730 (Team Driven)](https://www.thebluealliance.co
 
 ## Features
 
-- **5-tab workflow**: Pre-match → Autonomous → Teleop → Endgame → QR Export
-- **Visual field selection**: Interactive field diagram for starting position; reef placement diagram for auto scoring locations
-- **Real-time counters**: Track coral placements (L4/L3/L2/Trough), algae handling (processor/net), and missed cycles
+- **5-tab workflow**: Pre-match, Autonomous, Teleop, Endgame, and QR Export
+- **Visual field selection**: Interactive field diagram for starting position and a reef placement diagram for auto scoring locations
+- **Tap counters**: Track coral placements (L4/L3/L2/Trough), algae handling (processor/net), and missed cycles
 - **Status tracking**: Robot issues (died/broke), defense played/faced, climb level (none/park/shallow/deep)
 - **QR code export**: One tap generates a scannable QR code with all 24 data fields
-- **Cross-platform codebase**: One Flutter codebase that can target Android, iOS, web, and desktop; used on Android tablets at events
-- **Offline-first**: No network required during matches — perfect for competition venues
+- **Flutter codebase**: Flutter can target other platforms, and the app was used on Android tablets at events
+- **Offline-first**: No network required during matches
 - **Auto-increment match**: Match number advances automatically after each submission
 
 ## Usage Stats
@@ -65,7 +65,7 @@ My freshman year on [FRC Team 1730 (Team Driven)](https://www.thebluealliance.co
 |:------|--------:|------------:|
 | [Heartland Regional](https://www.thebluealliance.com/event/2025ksla) | 87 | 12,528 |
 | [Greater Kansas City Regional](https://www.thebluealliance.com/event/2025mokc) | 81 | 11,664 |
-| [Houston Champs — Newton Division](https://www.thebluealliance.com/event/2025new) | 140 | 20,160 |
+| [Houston Champs, Newton Division](https://www.thebluealliance.com/event/2025new) | 140 | 20,160 |
 
 </td>
 <td>
@@ -105,7 +105,7 @@ flowchart LR
     end
     
     subgraph Storage["SQLite Database"]
-        G --> H[INSERT INTO<br/>match_records]
+        G --> H[INSERT INTO<br/>MATCH_SCOUTING]
         H --> I[SQL queries for<br/>strategy analysis]
     end
 ```
@@ -197,7 +197,7 @@ algaeTakeOff*missed*bargeLevel*comments*totalCoralCycles*scoutName
 
 ### Why Flutter + SQLite?
 
-The Java/Android apps worked, but the fixed XML layouts didn't scale across screen sizes — every new tablet meant manual tweaks. Flutter gave me responsive layouts and one modern codebase for both the match and pit apps. The Excel macros were fragile and hard to modify; SQLite lets anyone write queries without touching VBA. The QR transfer stayed because it works offline at venues with unreliable WiFi.
+The Java/Android apps worked, but their layouts were fixed and non-responsive. Flutter gave me responsive layouts and one modern codebase for both the match and pit apps. In Excel, analysis was limited to filtering and pivot tables. SQLite lets anyone answer strategy questions with a query. The QR transfer stayed because it works offline at venues with unreliable WiFi.
 
 ## Tech Stack
 
