@@ -2,12 +2,12 @@
 
 <div align="center">
 
-[![Platform](https://img.shields.io/badge/Platform-Android_Tablets-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
+[![Platform](https://img.shields.io/badge/Platform-Android_%7C_iOS-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://developer.android.com/)
 [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/)
 [![FRC 2025](https://img.shields.io/badge/FRC-2025_Reefscape-0077C8?style=for-the-badge)](https://firstfrc.blob.core.windows.net/frc2025/Manual/2025GameManual.pdf)
 
-**Flutter app that captures match data and encodes it into QR codes for offline scouting at FRC competitions. Used on Android tablets at events.**
+**Flutter app that captures match data and encodes it into QR codes for offline scouting at FRC competitions. Deployed to every scout's own phone, Android or iOS.**
 
 [Features](#features) · [Screenshots](#screenshots) · [Architecture](#architecture) · [Usage Stats](#usage-stats) · [Build](#build-instructions)
 
@@ -39,7 +39,7 @@ My freshman year on [FRC Team 1730 (Team Driven)](https://www.thebluealliance.co
   </tr>
 </table>
 
-<sub>Rendered at 10" portrait tablet size, the devices the team scouted on.</sub>
+<sub>Screenshots rendered at tablet size. In competition the app ran on scouts' own phones.</sub>
 </div>
 
 ## Features
@@ -49,7 +49,7 @@ My freshman year on [FRC Team 1730 (Team Driven)](https://www.thebluealliance.co
 - **Tap counters**: Track coral placements (L4/L3/L2/Trough), algae handling (processor/net), and missed cycles
 - **Status tracking**: Robot issues (died/broke), defense played/faced, climb level (none/park/shallow/deep)
 - **QR code export**: One tap generates a scannable QR code with all 24 data fields
-- **Flutter codebase**: Flutter can target other platforms, and the app was used on Android tablets at events
+- **Flutter codebase**: One codebase deployed to every scout's own phone, Android or iOS
 - **Offline-first**: No network required during matches
 - **Auto-increment match**: Match number advances automatically after each submission
 
@@ -92,7 +92,7 @@ My freshman year on [FRC Team 1730 (Team Driven)](https://www.thebluealliance.co
 
 ```mermaid
 flowchart LR
-    subgraph Flutter["Flutter App (Android Tablet)"]
+    subgraph Flutter["Flutter App (Android or iOS phone)"]
         A[Scout enters data<br/>across 5 screens] --> B[StatefulWidget<br/>state variables]
         B --> C[formatData<br/>serializes 24 fields]
         C --> D[qr_flutter<br/>generates QR]
@@ -174,7 +174,7 @@ algaeTakeOff*missed*bargeLevel*comments*totalCoralCycles*scoutName
    flutter run
    ```
 
-4. Or build a release APK for Android tablets:
+4. Or build a release APK for Android phones:
    ```bash
    flutter build apk --release
    ```
