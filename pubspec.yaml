@@ -1,5 +1,5 @@
 name: frc_scouting_app_2025
-description: "A new Flutter project."
+description: "FRC Team 1730 2025 Reefscape match scouting app."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
